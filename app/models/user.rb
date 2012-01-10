@@ -8,7 +8,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #
-
+#hola
 require 'digest'
 class User < ActiveRecord::Base
   attr_accessor :password
