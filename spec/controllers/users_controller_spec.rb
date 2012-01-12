@@ -26,14 +26,14 @@ describe UsersController do
       get :show, :id => @user
       response.should have_selector("h1", :content => @user.name)
     end
-  end
-
-  describe "GET 'new'" do
 
     it "should have a profile image" do
       get :show, :id => @user
       response.should have_selector("h1>img", :class => "gravatar")
-    end    
+    end
+  end    
+
+  describe "GET 'new'" do
 
     it "should be successful" do
       get 'new'
@@ -57,7 +57,7 @@ describe UsersController do
       it "should not create a user" do
         lambda do
           post :create, :user => @attr
-        end.response.should_not change(User, :count)
+        end.should_not change(User, :count)
       end
       
       it "should have the right title" do
