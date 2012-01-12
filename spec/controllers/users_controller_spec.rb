@@ -47,7 +47,7 @@ describe UsersController do
   end
   
   describe "POST 'create'" do
-    
+
     describe "failure" do
       
       before(:each) do
