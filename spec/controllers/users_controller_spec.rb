@@ -46,7 +46,7 @@ describe UsersController do
     end 
   end
   
-  describe "POST 'create" do
+  describe "POST 'create'" do
     
     describe "failure" do
       
@@ -54,11 +54,11 @@ describe UsersController do
         @attr = { :name => "", :email => "", :password => "", :assword_confirmation => ""}
       end
       
-      it "should not create a user" do
-        lambda do
-          post :create, :user => @attr
-          end.response.should_not change(User, :count)
-      end
+     it "should not create a user" do
+       lambda do
+         post :create, :user => @attr
+       end.should_not change(User, :count)
+     end
       
       it "should have the right title" do
         post :create, :user => @attr
