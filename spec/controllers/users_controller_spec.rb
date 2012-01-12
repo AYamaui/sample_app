@@ -47,7 +47,7 @@ describe UsersController do
   end
   
   describe "POST 'create'" do
-    
+
     describe "failure" do
       
       before(:each) do
@@ -57,7 +57,7 @@ describe UsersController do
       it "should not create a user" do
         lambda do
           post :create, :user => @attr
-          end.response.should_not change(User, :count)
+        end.should_not change(User, :count)
       end
       
       it "should have the right title" do
