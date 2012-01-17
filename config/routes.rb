@@ -1,7 +1,9 @@
 SampleApp::Application.routes.draw do
   get "sessions/new"
-
   get "users/new"
+  #----twitter
+  get 'twitter_sessions/callback', :to => 'twitter_sessions#callback', :as => 'callback'
+  #----
 
   resources :users do
     member do
@@ -13,7 +15,10 @@ SampleApp::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
   resources :microposts, :only => [:create, :destroy]
   resources :relationships, :only => [:create, :destroy]
-
+  #----twitter
+  resources :twitter_sessions, :only => [:new, :create, :destroy, :callback]
+  #----
+  
   match '/signup',  :to => 'users#new'
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
