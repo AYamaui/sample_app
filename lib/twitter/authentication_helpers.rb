@@ -8,7 +8,7 @@ module Twitter
     end
 
     def signed_in?
-      !twitter_session[:screen_name].nil?
+      !session[:screen_name].nil?
     end
 
     protected
@@ -23,21 +23,21 @@ module Twitter
     end
 
     def sign_in(user)
-      twitter_session[:screen_name] = user.screen_name if user
+      session[:screen_name] = user.screen_name if user
     end
 
     def redirect_back_or(default)
-      twitter_session[:return_to] ||= params[:return_to]
-      if twitter_session[:return_to]
+      session[:return_to] ||= params[:return_to]
+      if session[:return_to]
         redirect_to(session[:return_to])
       else
         redirect_to(default)
       end
-      twitter_session[:return_to] = nil
+      session[:return_to] = nil
     end
 
     def store_location
-      twitter_session[:return_to] = request.request_uri if request.get?
+      session[:return_to] = request.request_uri if request.get?
     end
   end
 end

@@ -21,6 +21,8 @@
   sample application.
 </p>
 
+<strong>Firends</strong> <% if !@twitter_user.nil? %> <%= @twitter_user.followers_count %> <% end %>
+
 <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
 
 <% end %>

@@ -1,7 +1,9 @@
 SampleApp::Application.routes.draw do
+
   get "sessions/new"
   get "users/new"
   #----twitter
+  get "twitter_sessions/new"
   get 'twitter_sessions/callback', :to => 'twitter_sessions#callback', :as => 'callback'
   #----
 
