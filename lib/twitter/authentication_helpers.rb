@@ -7,7 +7,7 @@ module Twitter
       end
     end
 
-    def signed_in?
+    def twitter_signed_in?
       !session[:screen_name].nil?
     end
 
@@ -22,11 +22,11 @@ module Twitter
       render :template => "/twitter_sessions/new", :status => :unauthorized
     end
 
-    def sign_in(user)
+    def twitter_sign_in(user)
       session[:screen_name] = user.screen_name if user
     end
 
-    def redirect_back_or(default)
+    def twitter_redirect_back_or(default)
       session[:return_to] ||= params[:return_to]
       if session[:return_to]
         redirect_to(session[:return_to])

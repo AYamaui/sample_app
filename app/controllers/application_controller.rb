@@ -1,5 +1,5 @@
 #----twitter
-#require 'twitter/authentication_helpers'
+require 'twitter/authentication_helpers'
 #----
 
 class ApplicationController < ActionController::Base
@@ -7,10 +7,10 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   
   #----twitter
-  # include Twitter::AuthenticationHelpers
+   include Twitter::AuthenticationHelpers
   
   #Handle the 'Twitter:Unauthorized' exception with the force_sign_in action
-  rescue_from Twitter::Unauthorized, :with => :force_sign_in
+  #rescue_from Twitter::Unauthorized, :with => :force_sign_in
     
   private
 
@@ -21,15 +21,27 @@ class ApplicationController < ActionController::Base
 
   #Set the Twitter OAuth credentials
   def client
-    Twitter.configure do |config|
-      config.consumer_key = ENV['CONSUMER_KEY']
-      config.consumer_secret = ENV['CONSUMER_SECRET']
-      #The session['access_token/secret'] variables were assigned in the callback action
-      config.oauth_token = session['access_token']
-      config.oauth_token_secret = session['access_secret']
+    if current_user.access_token.nil?
+      Twitter.configure do |config|
+        config.consumer_key = ENV['CONSUMER_KEY']
+        config.consumer_secret = ENV['CONSUMER_SECRET']
+        #The session['access_token/secret'] variables were assigned in the callback action
+        config.oauth_token = session['access_token']
+        config.oauth_token_secret = session['access_secret']
+      end
+    else
+      binding.pry
+      Twitter.configure do |config|
+        config.consumer_key = ENV['CONSUMER_KEY']
+        config.consumer_secret = ENV['CONSUMER_SECRET']
+        #The session['access_token/secret'] variables were assigned in the callback action
+        config.oauth_token = current_user.access_token
+        config.oauth_token_secret = current_user.access_secret
+      end
     end
     #Create a client instance with the credentials seted before
-    @client ||= TwitterOAuth::Client.new
+    @client ||= Twitter::Client.new
+    
   end
   #Declare the controller method client as a heleper
   helper_method :client
@@ -38,7 +50,7 @@ class ApplicationController < ActionController::Base
     reset_session
     flash[:error] = "It seems your credentials are not good anymore. Please sign in again."
     #It has to redirect to the user profile
-    redirect_to new_session_path
+    redirect_to 'http://localhost:3000/users/101'
   end
   #----
   

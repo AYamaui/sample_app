@@ -12,7 +12,7 @@
 require 'digest'
 class User < ActiveRecord::Base
   attr_accessor :password
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, :email, :password, :password_confirmation, :access_token, :access_secret
   
   has_many :microposts, :dependent => :destroy
   has_many :relationships, :foreign_key => "follower_id",
@@ -36,9 +36,9 @@ class User < ActiveRecord::Base
   # Automatically create the virtual attribute 'password_confirmation'.
   validates :password, :presence     => true,
 		       :confirmation => true,
-		       :length	     => { :within => 6..40 }
+		       :length	     => { :within => 6..40 }, :on => :create
   
-  before_save :encrypt_password
+  before_create :encrypt_password
 
   # Return true if the user's password matches the submitted password.
   def has_password?(submitted_password)

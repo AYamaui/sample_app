@@ -4,8 +4,16 @@ class MicropostsController < ApplicationController
   
   def create
     @micropost  = current_user.microposts.build(params[:micropost])
+    binding.pry
     if @micropost.save
       flash[:success] = "Micropost created!"
+      
+      #Se envia un twitter con el contenido del micropost
+      @twitter_user = client.user if twitter_signed_in?
+      unless @twitter_user.nil? 
+        Twitter.update(params[:micropost]['content'])
+      end
+      
       redirect_to root_path
     else
       @feed_items = []

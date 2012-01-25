@@ -18,7 +18,7 @@ SampleApp::Application.routes.draw do
   resources :microposts, :only => [:create, :destroy]
   resources :relationships, :only => [:create, :destroy]
   #----twitter
-  resources :twitter_sessions, :only => [:new, :create, :destroy, :callback]
+  resources :twitter_sessions
   #----
   
   match '/signup',  :to => 'users#new'

@@ -31,6 +31,13 @@ group :test do
 
 end
 
+
+# Rails 3.1 - Heroku
+group :production do
+  gem "heroku"
+  gem 'pg'
+  gem 'newrelic_rpm'
+end
 # Use unicorn as the web server
 # gem 'unicorn'
 
