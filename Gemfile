@@ -37,7 +37,6 @@ end
 group :production do
   gem "heroku"
   gem 'pg'
-  gem 'newrelic_rpm'
 end
 # Use unicorn as the web server
 # gem 'unicorn'
