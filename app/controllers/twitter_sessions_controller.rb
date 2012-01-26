@@ -8,8 +8,7 @@ class TwitterSessionsController < ApplicationController
   
   def create
       #binding.pry
-      @oauth_consumer = oauth_consumer
-      request_token = @oauth_consumer.get_request_token(:oauth_callback => callback_url)
+      request_token = oauth_consumer.get_request_token(:oauth_callback => callback_url)
       session['request_token'] = request_token.token
       session['request_secret'] = request_token.secret
       #Redirects to the url where the user will grant or denny acces to their data
@@ -38,7 +37,7 @@ class TwitterSessionsController < ApplicationController
     
     twitter_user = client.verify_credentials
     twitter_sign_in(twitter_user)
-    twitter_redirect_back_or user_path(current_user)
+    twitter_redirect_back_or http://smooth-frost-1157.herokuapp.com/users/1
     #binding.pry
   end
 
