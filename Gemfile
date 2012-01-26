@@ -37,7 +37,10 @@ end
 group :production do
   gem "heroku"
   gem 'pg'
+  gem 'faker', '0.3.1'
 end
+
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
