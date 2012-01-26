@@ -2,20 +2,20 @@ class TwitterSessionsController < ApplicationController
 
   
   def new
-    binding.pry
+    #binding.pry
     @twitter_user = client.user if twitter_signed_in?
   end
   
   def create
     if current_user.access_token.nil?
-      binding.pry
+      #binding.pry
       request_token = oauth_consumer.get_request_token(:oauth_callback => callback_url)
       session['request_token'] = request_token.token
       session['request_secret'] = request_token.secret
       #Redirects to the url where the user will grant or denny acces to their data
       redirect_to request_token.authorize_url
     else
-      binding.pry
+      #binding.pry
       twitter_user = client.verify_credentials
       twitter_sign_in(twitter_user)
       twitter_redirect_back_or user_path(current_user)
@@ -31,7 +31,7 @@ class TwitterSessionsController < ApplicationController
     request_token = OAuth::RequestToken.new(oauth_consumer, session['request_token'], session['request_secret'])
     access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
     
-    binding.pry
+    #binding.pry
     current_user.access_token = access_token.token
     current_user.access_secret = access_token.secret
     current_user.save
@@ -45,7 +45,7 @@ class TwitterSessionsController < ApplicationController
     twitter_user = client.verify_credentials
     twitter_sign_in(twitter_user)
     twitter_redirect_back_or user_path(current_user)
-    binding.pry
+    #binding.pry
   end
 
 end

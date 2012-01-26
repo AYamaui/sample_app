@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
        @title = "Sign in"
        render 'new'
      else       
-       binding.pry
+       #binding.pry
        sign_in user
        @twitter_user = client.user if twitter_signed_in?
        if !current_user.access_token.nil?
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
   end
   
   def create_twitter_connection
-    binding.pry
+    #binding.pry
     twitter_user = client.verify_credentials
     twitter_sign_in(twitter_user)
   end

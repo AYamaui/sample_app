@@ -4,7 +4,7 @@ class MicropostsController < ApplicationController
   
   def create
     @micropost  = current_user.microposts.build(params[:micropost])
-    binding.pry
+    #binding.pry
     if @micropost.save
       flash[:success] = "Micropost created!"
       

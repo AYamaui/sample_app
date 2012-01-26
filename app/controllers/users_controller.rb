@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    binding.pry
+    #binding.pry
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(:page => params[:page])
     @title = @user.name
