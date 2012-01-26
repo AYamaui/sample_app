@@ -7,19 +7,12 @@ class TwitterSessionsController < ApplicationController
   end
   
   def create
-    if current_user.access_token.nil?
       #binding.pry
       request_token = oauth_consumer.get_request_token(:oauth_callback => callback_url)
       session['request_token'] = request_token.token
       session['request_secret'] = request_token.secret
       #Redirects to the url where the user will grant or denny acces to their data
       redirect_to request_token.authorize_url
-    else
-      #binding.pry
-      twitter_user = client.verify_credentials
-      twitter_sign_in(twitter_user)
-      twitter_redirect_back_or user_path(current_user)
-    end
   end
 
   def destroy

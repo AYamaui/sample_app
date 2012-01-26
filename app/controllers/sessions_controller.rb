@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
 
   def destroy
     #Twitter reset session
-    close_session
+    reset_session
     sign_out
     redirect_to root_path
   end
