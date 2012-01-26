@@ -8,7 +8,8 @@ class TwitterSessionsController < ApplicationController
   
   def create
       #binding.pry
-      request_token = oauth_consumer.get_request_token(:oauth_callback => callback_url)
+      @oauth_consumer = oauth_consumer
+      request_token = @oauth_consumer.get_request_token(:oauth_callback => callback_url)
       session['request_token'] = request_token.token
       session['request_secret'] = request_token.secret
       #Redirects to the url where the user will grant or denny acces to their data
