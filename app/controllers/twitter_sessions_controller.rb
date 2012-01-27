@@ -37,7 +37,7 @@ class TwitterSessionsController < ApplicationController
     
     twitter_user = client.verify_credentials
     twitter_sign_in(twitter_user)
-    twitter_redirect_back_or http://smooth-frost-1157.herokuapp.com/users/1
+    twitter_redirect_back_or "http://smooth-frost-1157.herokuapp.com/users/1"
     #binding.pry
   end
 
