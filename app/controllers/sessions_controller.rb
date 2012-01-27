@@ -23,9 +23,6 @@ class SessionsController < ApplicationController
   def destroy
     #Twitter reset session
     reset_session
-    unless current_user.access_token.nil?
-      Twitter.end_session
-    end
     sign_out
     redirect_to root_path
   end
