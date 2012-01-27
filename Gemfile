@@ -3,7 +3,6 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.11'
 gem 'oauth', '~> 0.4.4'
 gem 'twitter', '~> 1.4.1'
-gem 'newrelic_rpm'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -39,6 +38,7 @@ group :production do
   gem "heroku"
   gem 'pg'
   gem 'faker', '0.3.1'
+  gem 'newrelic_rpm'
 end
 
 
