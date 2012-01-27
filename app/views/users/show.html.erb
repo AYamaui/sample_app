@@ -17,6 +17,7 @@
 		<strong>Name</strong> <%= @user.name %><br />
 		<strong>URL</strong> <%= link_to user_path(@user), @user %> 
 		<strong>Microposts</strong> <%= @user.microposts.count %>
+		<% binding.pry %>
 		<strong>Friends</strong><% unless @twitter_user.nil? %> <%= @twitter_user.followers_count %> <% end %>
 		<%= render 'shared/stats' %>
 		<%= form_tag('/twitter_sessions') do %>

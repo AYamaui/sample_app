@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   #Create a new consumer instance by passing it a configuration hash
   def oauth_consumer
-    @oauth_consumer ||= OAuth::Consumer.new('8HMEWgi9jCjSS8DzWyX8Q', 'N96T1OPRx5vQgCIzoKVMKntXcALkckNmt4mCwaKioGA', :site => 'http://api.twitter.com', :request_endpoint => 'http://api.twitter.com', :sign_in => true)
+    @oauth_consumer ||= OAuth::Consumer.new('8HMEWgi9jCjSS8DzWyX8Q', 'N96T1OPRx5vQgCIzoKVMKntXcALkckNmt4mCwaKioGA', :site => 'http://api.twitter.com', :request_endpoint => 'http://api.twitter.com', :sign_in => false, :force_login => true)
   end
 
   #Set the Twitter OAuth credentials
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
         config.oauth_token_secret = session['access_secret']
       end
     else
-      #binding.pry
+      binding.pry
       Twitter.configure do |config|
         config.consumer_key = '8HMEWgi9jCjSS8DzWyX8Q'
         config.consumer_secret = 'N96T1OPRx5vQgCIzoKVMKntXcALkckNmt4mCwaKioGA'
