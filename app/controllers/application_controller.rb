@@ -32,8 +32,8 @@ class ApplicationController < ActionController::Base
     else
       #binding.pry
       Twitter.configure do |config|
-        config.consumer_key = ENV['CONSUMER_KEY']
-        config.consumer_secret = ENV['CONSUMER_SECRET']
+        config.consumer_key = '8HMEWgi9jCjSS8DzWyX8Q'
+        config.consumer_secret = 'N96T1OPRx5vQgCIzoKVMKntXcALkckNmt4mCwaKioGA'
         #The session['access_token/secret'] variables were assigned in the callback action
         config.oauth_token = current_user.access_token
         config.oauth_token_secret = current_user.access_secret
