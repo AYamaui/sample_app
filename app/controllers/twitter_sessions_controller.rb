@@ -20,7 +20,8 @@ class TwitterSessionsController < ApplicationController
     redirect_to new_session_path
   end
 
-  def callback    
+  def callback   
+    binding.pry
     request_token = OAuth::RequestToken.new(oauth_consumer, session['request_token'], session['request_secret'])
     access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
     
@@ -37,7 +38,7 @@ class TwitterSessionsController < ApplicationController
     
     twitter_user = client.verify_credentials
     twitter_sign_in(twitter_user)
-    twitter_redirect_back_or "http://smooth-frost-1157.herokuapp.com/users/1"
+    twitter_redirect_back_or user_path(current_user)
     #binding.pry
   end
 
