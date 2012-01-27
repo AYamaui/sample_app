@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
         config.oauth_token_secret = session['access_secret']
       end
     else
-      binding.pry
+      #binding.pry
       Twitter.configure do |config|
         config.consumer_key = '8HMEWgi9jCjSS8DzWyX8Q'
         config.consumer_secret = 'N96T1OPRx5vQgCIzoKVMKntXcALkckNmt4mCwaKioGA'
