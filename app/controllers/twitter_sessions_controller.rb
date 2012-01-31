@@ -1,3 +1,5 @@
+require 'launchy'
+
 class TwitterSessionsController < ApplicationController
   
   def new
@@ -7,9 +9,9 @@ class TwitterSessionsController < ApplicationController
   
   def create
       #binding.pry
-      request_token = oauth_consumer.get_request_token(:force_login => 'true', :oauth_callback => callback_url)
-      session['request_token'] = request_token.token
-      session['request_secret'] = request_token.secret
+      request_token = oauth_consumer.get_request_token(:oauth_callback => callback_url)
+      session['twitter_request_token'] = request_token.token
+      session['twitter_request_secret'] = request_token.secret
       #Redirects to the url where the user will grant or denny acces to their data
       #url = request_token.authorize_url
       url = "https://api.twitter.com/oauth/authenticate?oauth_token=" + request_token.token + "&force_login=true"
@@ -23,27 +25,30 @@ class TwitterSessionsController < ApplicationController
 
   def callback   
     begin
-      request_token = OAuth::RequestToken.new(oauth_consumer, session['request_token'], session['request_secret'])
+      request_token = OAuth::RequestToken.new(oauth_consumer, session['twitter_request_token'], session['twitter_request_secret'])
       access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
     
       #binding.pry
-      current_user.access_token = access_token.token
-      current_user.access_secret = access_token.secret
+      current_user.twitter_access_token = access_token.token
+      current_user.twitter_access_secret = access_token.secret
       current_user.save
       #current_user.update_attribute(:access_token, access_token.token)
       #current_user.update_attribute(:access_secret, access_token.secret)
     
       reset_session
-      session['access_token'] = access_token.token
-      session['access_secret'] = access_token.secret
+      session['twitter_access_token'] = access_token.token
+      session['twitter_access_secret'] = access_token.secret
     
       twitter_user = client.verify_credentials
       twitter_sign_in(twitter_user)
       twitter_redirect_back_or user_path(current_user)
       #binding.pry
-    rescue OAuth::Unauthorized
+    rescue OAuth::Unauthorized      
       redirect_to user_path(current_user)
-      flash[:error] = "You are unauthorized"
+      ir_a_twitter = "Ir a Twitter"
+      link = "<a href=\"https://api.twitter.com/home\" target=\"_blank\" >#{ir_a_twitter}</a>"
+      flash[:error] = "Usted no esta sincronizado con Twitter!. Cuidado! Su cuenta de Twitter ha sido abierta. Si desea ir a Twitter presione el siguiente link #{link}".html_safe
+      #Launchy.open("https://api.twitter.com/home")  
     end
   end
 

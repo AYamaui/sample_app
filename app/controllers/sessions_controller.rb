@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
        #binding.pry
        sign_in user
        @twitter_user = client.user if twitter_signed_in?
-       if !current_user.access_token.nil?
+       if !current_user.twitter_access_token.nil?
          create_twitter_connection
        end
        redirect_back_or user

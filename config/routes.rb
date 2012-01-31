@@ -1,5 +1,13 @@
 SampleApp::Application.routes.draw do
 
+  get "facebook_sessions/new"
+
+  get "facebook_sessions/create"
+
+  get "facebook_sessions/destroy"
+
+  get "facebook_sessions/callback"
+
   get "sessions/new"
   get "users/new"
   #----twitter
