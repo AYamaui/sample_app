@@ -40,11 +40,9 @@ ActiveRecord::Schema.define(:version => 20120123163130) do
     t.datetime "updated_at"
     t.string   "encrypted_password"
     t.string   "salt"
-    t.boolean  "admin",              :default => false
-    t.string   "access_token"
-    t.string   "access_secret"
+    t.boolean  "admin",                 :default => false
+    t.string   "twitter_access_token"
+    t.string   "twitter_access_secret"
   end
-
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end
