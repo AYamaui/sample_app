@@ -1,7 +1,5 @@
 SampleApp::Application.routes.draw do
 
-  resources :mail_users
-
   get "facebook_sessions/new"
 
   get "facebook_sessions/create"
