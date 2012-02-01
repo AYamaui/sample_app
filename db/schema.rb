@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131154210) do
+ActiveRecord::Schema.define(:version => 20120201155159) do
+
+  create_table "mail_users", :force => true do |t|
+    t.string   "mail_name"
+    t.string   "mail_email"
+    t.string   "mail_login"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "microposts", :force => true do |t|
     t.string   "content"
