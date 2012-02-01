@@ -1,5 +1,7 @@
+require 'net/http'
+
 class UsersController < ApplicationController
-  before_filter :authenticate, :except => [:show, :new, :create]
+  before_filter :authenticate, :except => [:show, :new, :create, :get_bounces]
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user,   :only => :destroy
   
@@ -14,6 +16,10 @@ class UsersController < ApplicationController
     @microposts = @user.microposts.paginate(:page => params[:page])
     @title = @user.name
     session['current_url'] = request.fullpath
+    puts 'BOUNCES'
+    url = URI.parse('https://sendgrid.com/api/bounces.get.xml?api_user=app2629184@heroku.com&api_key=bwlc5p0g')
+    puts url.host
+    get_bounces
   end
 
   def new
@@ -69,6 +75,15 @@ class UsersController < ApplicationController
     @users = @user.followers.paginate(:page => params[:page])
     render 'show_follow'
   end
+  
+  def get_bounces
+    url = URI.parse('https://sendgrid.com/api/bounces.get.json?api_user=app2629184@heroku.com&api_key=bwlc5p0g')
+    http = Net::HTTP.new(url.host, '443')
+    http.use_ssl = true
+    req = Net::HTTP::Get.new('/api/bounces.get.json?api_user=app2629184@heroku.com&api_key=bwlc5p0g')
+    res = http.start do |http| http.request(req) end
+    puts res.body
+  end   
 
   
   private
