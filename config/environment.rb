@@ -6,10 +6,10 @@ SampleApp::Application.initialize!
 
 ActionMailer::Base.smtp_settings = {
   :user_name => "app2629184@heroku.com",
-  :password => "chipotle89",
+  :password => "bwlc5p0g",
   :domain => "http://smooth-frost-1157.herokuapp.com",
   :address => "smtp.sendgrid.net",
-  :port => 25,
+  :port => '587',
   :authentication => :plain,
   :enable_starttls_auto => true
 }

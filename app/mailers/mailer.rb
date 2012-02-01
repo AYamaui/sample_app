@@ -1,7 +1,7 @@
 class Mailer < ActionMailer::Base  
   include SendGrid
   
-  default :from => "app2629184@heroku.com"
+  default :from => "alexandra.yamaui@gmail.com"
   
   sendgrid_category :use_subject_lines
   sendgrid_enable :ganalytics, :opentrack
